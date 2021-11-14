@@ -1,0 +1,93 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* valorant colors: */
+  --cp: #ece8e1;
+  --cpn: #768079;
+  --cs: #ff4655;
+  --csn: #111111;
+  font-family: DINNextW1G, arial, georgia, sans-serif;
+}
+
+body {
+  background: var(--cp);
+}
+
+main {
+  max-width: 420px;
+  margin: auto;
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
+
+section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: auto;
+  border-radius: 8px;
+  padding: 1em;
+  color: white;
+  width: 100%;
+  background: rgb(255, 70, 85);
+  background: -moz-linear-gradient(163deg, rgba(255, 70, 85, 1) 0%, rgba(17, 17, 17, 1) 100%);
+  background: -webkit-linear-gradient(163deg, rgba(255, 70, 85, 1) 0%, rgba(17, 17, 17, 1) 100%);
+  background: linear-gradient(163deg, rgba(255, 70, 85, 1) 0%, rgba(17, 17, 17, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ff4655", endColorstr="#111111", GradientType=1);
+}
+
+#change_username {}
+
+#username {
+  border-radius: 6px;
+  border: none;
+  height: 22px;
+  text-align: center;
+}
+
+#change_color {}
+
+#message {}
+
+h2 {
+  font-size: 1em;
+}
+
+#color_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+button {
+  height: 30px;
+  width: 30px;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.623);
+  background: rgb(163, 23, 23);
+}
+
+button:hover {
+  background: rgb(77, 22, 22);
+}
+
+button:active {
+  box-shadow: unset;
+}
+
+button.current {
+  box-shadow: 0 0 0 2px white,
+    0 0 0 4px black;
+}

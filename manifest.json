@@ -1,0 +1,26 @@
+{
+    "name": "Valorant",
+    "description": "Api content !",
+    "version": "1.0",
+    "manifest_version": 3,
+    "options_page": "options.html",
+    "background": {
+        "service_worker": "/js/background.js"
+    },
+    "permissions": ["storage", "activeTab", "scripting"],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "/images/valorant.png",
+            "32": "/images/valorant.png",
+            "48": "/images/valorant.png",
+            "128": "/images/valorant.png"
+        }
+    },
+    "icons": {
+        "16": "/images/valorant.png",
+        "32": "/images/valorant.png",
+        "48": "/images/valorant.png",
+        "128": "/images/valorant.png"
+    }
+}

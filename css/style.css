@@ -1,0 +1,61 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* valorant colors: */
+  --cp: #ece8e1;
+  --cpn: #768079;
+  --cs: #ff4655;
+  --csn: #111111;
+  font-family: DINNextW1G, arial, georgia, sans-serif;
+}
+
+#players_list {
+    display: flex;
+    flex-direction: column;
+    gap: .25em;
+    align-items: center;
+    justify-content: center;
+    background: #292929;
+    color: white;
+    font-size: 1em;
+    max-width: 80%;
+    margin: auto;
+    border-radius: 8px;
+    /* border: 3px solid #b9bd43; */
+}
+
+.player_item {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    background: #c0c0c038;
+    height: 2.5em;
+}
+
+.player_name {}
+.player_name_active {
+    color: #eefa39ad;
+    font-weight: 900;
+}
+
+.player_rank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.player_rank img {
+    width: 30px;
+}
+
+.player_rank h3 {
+    margin: 0;
+    font-size: 12px;
+}

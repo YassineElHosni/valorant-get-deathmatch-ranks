@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* valorant colors: */
+  --cp: #ece8e1;
+  --cpn: #768079;
+  --cs: #ff4655;
+  --csn: #111111;
+  font-family: DINNextW1G, arial, georgia, sans-serif;
+}
+
+body {
+  background: var(--cs);
+}
+
+button {
+  height: 30px;
+  width: 30px;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 4px 6px 14px rgba(0, 0, 0, 0.623);
+  background: var(--cp);
+}
+
+button:hover {
+  background: rgb(77, 22, 22);
+}
+
+button:active {
+  box-shadow: unset;
+}
+
+#current_username {
+  color: #eefa39ad;
+  font-weight: 900;
+}
