@@ -11,16 +11,16 @@
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "/images/valorant.png",
-            "32": "/images/valorant.png",
-            "48": "/images/valorant.png",
-            "128": "/images/valorant.png"
+            "16": "/images/valorant16.png",
+            "32": "/images/valorant32.png",
+            "48": "/images/valorant48.png",
+            "128": "/images/valorant128.png"
         }
     },
     "icons": {
-        "16": "/images/valorant.png",
-        "32": "/images/valorant.png",
-        "48": "/images/valorant.png",
-        "128": "/images/valorant.png"
+        "16": "/images/valorant16.png",
+        "32": "/images/valorant32.png",
+        "48": "/images/valorant48.png",
+        "128": "/images/valorant128.png"
     }
 }
