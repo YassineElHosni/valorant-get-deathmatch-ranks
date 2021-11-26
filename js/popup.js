@@ -8,7 +8,9 @@ let inject_scripts = document.getElementById("inject_scripts")
 // })
 
 let current_username = document.getElementById("current_username")
-chrome.storage.sync.get("player", ({player}) => {
+chrome.storage.sync.get("player", ({
+  player
+}) => {
   current_username.innerText = player.username
 })
 
@@ -22,7 +24,7 @@ inject_scripts.addEventListener("click", async () => {
     target: {
       tabId: tab.id
     },
-    files: ["/css/style.css"]
+    files: ["css/theme.css", "/css/style.css"]
   })
   chrome.scripting.executeScript({
     target: {

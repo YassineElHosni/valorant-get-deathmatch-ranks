@@ -1,0 +1,17 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* valorant colors: */
+  --cp: #ece8e1;
+  --cpn: #768079;
+  --cs: #ff4655;
+  --cs_hover: #cf3440;
+  --csn: #111111;
+  font-family: DINNextW1G, arial, georgia, sans-serif;
+
+  --text-active: #eefa39ad;
+}

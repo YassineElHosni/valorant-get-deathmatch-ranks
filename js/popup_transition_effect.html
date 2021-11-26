@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+div {
+  width: 300px;
+  height: 100px;
+  background-color: yellow;
+  border: 1px solid black;
+  transition: transform 1s, opacity 1s;
+  transform: scale(.1);
+  transform-origin: top right;
+  opacity:0;
+}
+.move {
+  transform: scale(1);
+  opacity:1;
+}
+</style>
+</head>
+<body>
+
+<h1>The translate() Method</h1>
+<p>The translate() method moves an element from its current position:</p>
+
+<div>
+This div element is moved 50 pixels to the right, and 100 pixels down from its current position.
+</div>
+<script>
+let hasMove = false
+document.querySelector('body').addEventListener('click',(e)=>{
+  console.log('clicked')
+  if(hasMove)
+  	document.querySelector('div').classList.remove('move')
+  else
+  	document.querySelector('div').classList.add('move')
+  hasMove = !hasMove
+})
+</script>
+</body>
+</html>
+
+

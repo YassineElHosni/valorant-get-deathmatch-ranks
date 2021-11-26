@@ -1,18 +1,3 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-:root {
-  /* valorant colors: */
-  --cp: #ece8e1;
-  --cpn: #768079;
-  --cs: #ff4655;
-  --csn: #111111;
-  font-family: DINNextW1G, arial, georgia, sans-serif;
-}
-
 body {
   background: var(--cs);
 }
@@ -36,6 +21,6 @@ button:active {
 }
 
 #current_username {
-  color: #eefa39ad;
+  color: var(--text-active);
   font-weight: 900;
 }

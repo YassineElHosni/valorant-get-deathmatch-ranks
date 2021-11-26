@@ -1,26 +1,25 @@
 {
-    "name": "Valorant",
-    "description": "Get the list of users ranks from your last deathmatch",
-    "version": "0.0.0.1",
-    "manifest_version": 3,
-    "options_page": "options.html",
-    "background": {
-        "service_worker": "/js/background.js"
-    },
-    "permissions": ["storage", "activeTab", "scripting"],
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "/images/valorant16.png",
-            "32": "/images/valorant32.png",
-            "48": "/images/valorant48.png",
-            "128": "/images/valorant128.png"
-        }
-    },
-    "icons": {
-        "16": "/images/valorant16.png",
-        "32": "/images/valorant32.png",
-        "48": "/images/valorant48.png",
-        "128": "/images/valorant128.png"
+  "name": "Valorant",
+  "description": "Get the list of users ranks from your last deathmatch",
+  "version": "0.0.0.1",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "/js/background.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_icon": {
+      "16": "/images/valorant16.png",
+      "32": "/images/valorant32.png",
+      "48": "/images/valorant48.png",
+      "128": "/images/valorant128.png"
     }
+  },
+  "icons": {
+    "16": "/images/valorant16.png",
+    "32": "/images/valorant32.png",
+    "48": "/images/valorant48.png",
+    "128": "/images/valorant128.png"
+  }
 }
