@@ -1,11 +1,12 @@
 try {
-  store
+  temporaryStorage
   // setUp()
   const data_popup = genereateDataPopup()
-  genereatePopup(data_popup)
+  genereateSidePopup(data_popup)
 } catch (e) {
 
-  const store = {
+  //#region TemporaryStorage
+  const temporaryStorage = {
     currentPlayer: {
       username: ''
     },
@@ -15,23 +16,25 @@ try {
     players: [],
   }
 
-  const StoreManager = {
+  const temporaryStorageManager = {
     setCurrentPlayer: (player) => {
-      store.currentPlayer.username = player.username
+      temporaryStorage.currentPlayer.username = player.username
     },
     setCurrentMatch: (id) => {
-      store.currentMatch.id = id
+      temporaryStorage.currentMatch.id = id
     },
     setPlayers: (players) => {
-      store.players = players
+      temporaryStorage.players = players
     },
     setPlayer: (player) => {
       console.log('player', player)
-      const targetId = store.players.findIndex(o => o.username === player.username)
-      store.players[targetId].rank = player.rank
+      const targetId = temporaryStorage.players.findIndex(o => o.username === player.username)
+      temporaryStorage.players[targetId].rank = player.rank
     }
   }
+  //#endregion TemporaryStorage
 
+  //#region Constants
   const API_TARGET = 'https://api.tracker.gg/api/v2/valorant/standard/matches/riot'
 
   const DEATHMATCH = "deathmatch",
@@ -46,6 +49,7 @@ try {
       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
     }
   }
+  //#endregion Constants
 
   const sortingPlayersByPublicRank = (a, b) => {
     if (typeof a.rank == "string" && typeof b.rank == "string") return 0
@@ -53,6 +57,7 @@ try {
     if (typeof a.rank != "string" && typeof b.rank == "string") return -1
   }
 
+  //#region HTMLGenerators
   const el = (tag, props = {}, ch = []) => ch.reduce((e, c) => (e.appendChild(c), e), Object.assign(document.createElement(tag), props))
 
   const getListHtml = () => {
@@ -66,13 +71,12 @@ try {
       innerText: 'loading...'
     }, [])
   }
-
   const getListItemHtml = (player) => {
     return el('div', {
       classList: ['player_item']
     }, [
       el('h3', {
-        classList: [player.username === store.currentPlayer.username ? 'player_name_active' : 'player_name'],
+        classList: [player.username === temporaryStorage.currentPlayer.username ? 'player_name_active' : 'player_name'],
         innerText: `${player.username}`
       }),
       el('div', {
@@ -90,6 +94,67 @@ try {
     innerText: `${o.username}: ${o.rank?.tierName || 'private'}`
   })
 
+  const getSidePopupHTML = () => el('div', {
+    id: 'valorant_get_hidden_ranks_popup'
+  }, [
+    el('h4', {
+      innerText: 'Get last game hidden ranks'
+    })
+  ])
+
+  const getDataPopupHTML = () => el('div', {
+    id: 'valorant_get_hidden_ranks_data'
+  }, [
+    el('div', {
+      id: 'valorant_get_hidden_ranks_data_current_gamemode',
+    }, [
+      el('input', {
+        id: 'valorant_get_hidden_ranks_data_current_gamemode_unrated',
+        type: 'button',
+        value: 'UNRATED'
+      }),
+      el('input', {
+        id: 'valorant_get_hidden_ranks_data_current_gamemode_deathmatch',
+        type: 'button',
+        value: 'DEATHMATCH'
+      })
+    ]),
+    el('div', {
+      id: 'valorant_get_hidden_ranks_data_current_user',
+    }, [
+      el('img', {
+        id: 'valorant_get_hidden_ranks_data_current_user_image',
+        src: 'some image',
+        alt: '[image]'
+      }),
+      el('div', {
+        id: 'valorant_get_hidden_ranks_data_current_user_username',
+        innerText: '[username]'
+      }),
+    ]),
+    el('div', {
+      id: 'valorant_get_hidden_ranks_data_search_bar',
+    }, [
+      el('input', {
+        type: 'text',
+        placeholder: 'Search using a diffrent username'
+      })
+    ]),
+    el('div', {
+        id: 'valorant_get_hidden_ranks_data_list',
+      },
+      // [...Array(14)].map((o, i) =>
+      //   el('div', {
+      //     classList: ['valorant_get_hidden_ranks_data_list_item'],
+      //     innerText: `user00${i+1}#tag00${i+1} Rank00${i+1}`
+      //   })
+      // )
+    )
+  ])
+  //#endregion HTMLGenerators
+
+  //#region Api
+
   // get player deathmatch or competitive
   // parms: username
   // https://api.tracker.gg/api/v2/valorant/standard/matches/riot/Genis%239846?type=deathmatch
@@ -104,7 +169,7 @@ try {
         if (data.errors) {
           return data
         }
-        StoreManager.setCurrentMatch(data.data.matches[0].attributes.id)
+        temporaryStorageManager.setCurrentMatch(data.data.matches[0].attributes.id)
         return data.data.matches[0].attributes.id
       })
       .catch(e => {
@@ -114,8 +179,8 @@ try {
 
   const getPlayerRank = (username) => {
     const callBack = (player) => {
-      StoreManager.setPlayer(player)
-      logger.info(`loading players of ranks(${store.players.filter(o => o.rank).length}/${store.players.length})...`)
+      temporaryStorageManager.setPlayer(player)
+      logger.info(`loading players of ranks(${temporaryStorage.players.filter(o => o.rank).length}/${temporaryStorage.players.length})...`)
       return player
     }
     return getUserMatches(username, COMPETITIVE)
@@ -154,13 +219,15 @@ try {
         const players = data.data.segments.filter(o => o.type == "player-summary").map(o => o = {
           username: o.attributes.platformUserIdentifier
         })
-        StoreManager.setPlayers(players)
+        temporaryStorageManager.setPlayers(players)
         return players
       })
       .catch(e => {
         console.log('getPlayersOfMatch - got an error -', e)
       })
   }
+
+  //#endregion Api
 
   const logger = {
     info: (message) => {
@@ -171,6 +238,7 @@ try {
     }
   }
 
+  //#region SyncStorage
   const getAllStorageSyncData = () => {
     // Immediately return a promise and start asynchronous work
     return new Promise((resolve, reject) => {
@@ -185,7 +253,9 @@ try {
       });
     });
   }
+  //#endregion SyncStorage
 
+  //#region Draw
   const setUp = async (data_target) => {
     // document.body.innerHTML = ''
     // document.body.appendChild(getMessageDiv())
@@ -200,41 +270,35 @@ try {
 
     const allStorageSyncData = await getAllStorageSyncData()
     console.log('getAllStorageSyncData', allStorageSyncData)
-    StoreManager.setCurrentPlayer(allStorageSyncData.player)
+    temporaryStorageManager.setCurrentPlayer(allStorageSyncData.player)
 
     logger.info('Loading latest match id...')
-    let results = await getMatchId(store.currentPlayer.username)
+    let results = await getMatchId(temporaryStorage.currentPlayer.username)
     console.log('getMatchId results', results)
     if (results.errors) {
       logger.info(`The selected User is private XD`)
       return
     }
-    logger.info(`Current match id=${store.currentMatch.id}`)
+    logger.info(`Current match id=${temporaryStorage.currentMatch.id}`)
 
-    logger.info(`Loading players of match (${store.currentMatch.id})...`)
-    await getPlayersOfMatch(store.currentMatch.id)
-    logger.info(`${store.players.length} players have been found !`)
+    logger.info(`Loading players of match (${temporaryStorage.currentMatch.id})...`)
+    await getPlayersOfMatch(temporaryStorage.currentMatch.id)
+    logger.info(`${temporaryStorage.players.length} players have been found !`)
 
-    await Promise.all(store.players.map(o => getPlayerRank(o.username)))
+    await Promise.all(temporaryStorage.players.map(o => getPlayerRank(o.username)))
     logger.info(`loading complete !`)
 
-    console.log('store', store)
+    console.log('temporaryStorage', temporaryStorage)
 
-    store.players.sort(sortingPlayersByPublicRank).forEach(o => {
+    temporaryStorage.players.sort(sortingPlayersByPublicRank).forEach(o => {
       // document.body.querySelector('#players_list')
       data_target.appendChild(getPlayerItemHtml(o))
     })
   }
   // setUp()
   let isPopupOpen = false
-  const genereatePopup = (data_popup) => {
-    document.body.appendChild(el('div', {
-      id: 'valorant_get_hidden_ranks_popup'
-    }, [
-      el('h4', {
-        innerText: 'Get last game hidden ranks'
-      })
-    ]))
+  const genereateSidePopup = (data_popup) => {
+    document.body.appendChild(getSidePopupHTML())
     let target = document.querySelector('#valorant_get_hidden_ranks_popup')
     target.addEventListener('click', () => {
       console.log('/click.current:', isPopupOpen)
@@ -251,59 +315,12 @@ try {
   }
 
   const genereateDataPopup = () => {
-    document.body.appendChild(el('div', {
-      id: 'valorant_get_hidden_ranks_data'
-    }, [
-      el('div', {
-        id: 'valorant_get_hidden_ranks_data_current_gamemode',
-      }, [
-        el('input', {
-          id: 'valorant_get_hidden_ranks_data_current_gamemode_unrated',
-          type: 'button',
-          value: 'UNRATED'
-        }),
-        el('input', {
-          id: 'valorant_get_hidden_ranks_data_current_gamemode_deathmatch',
-          type: 'button',
-          value: 'DEATHMATCH'
-        })
-      ]),
-      el('div', {
-        id: 'valorant_get_hidden_ranks_data_current_user',
-      }, [
-        el('img', {
-          id: 'valorant_get_hidden_ranks_data_current_user_image',
-          src: 'some image',
-          alt: '[image]'
-        }),
-        el('div', {
-          id: 'valorant_get_hidden_ranks_data_current_user_username',
-          innerText: '[username]'
-        }),
-      ]),
-      el('div', {
-        id: 'valorant_get_hidden_ranks_data_search_bar',
-      }, [
-        el('input', {
-          type: 'text',
-          placeholder: 'Search using a diffrent username'
-        })
-      ]),
-      el('div', {
-          id: 'valorant_get_hidden_ranks_data_list',
-        },
-        // [...Array(14)].map((o, i) =>
-        //   el('div', {
-        //     classList: ['valorant_get_hidden_ranks_data_list_item'],
-        //     innerText: `user00${i+1}#tag00${i+1} Rank00${i+1}`
-        //   })
-        // )
-      )
-    ]))
+    document.body.appendChild(getDataPopupHTML())
     return document.querySelector('#valorant_get_hidden_ranks_data')
   }
 
   const data_popup = genereateDataPopup()
-  genereatePopup(data_popup)
+  genereateSidePopup(data_popup)
   setUp(document.querySelector('#valorant_get_hidden_ranks_data_list'))
+  //#endregion Draw
 }
