@@ -24,7 +24,7 @@
 #valorant_get_hidden_ranks_data {
   position: fixed;
   inset: 0;
-  background: red;
+  background: var(--cs_dark_see_through);
   z-index: 100000;
   top: 92px;
   display: none;
@@ -38,6 +38,78 @@
   display: flex !important;
 }
 
+#valorant_get_hidden_ranks_data_current_gamemode {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: .5em;
+}
+
+#valorant_get_hidden_ranks_data_current_gamemode input {
+  color: #ece8e1;
+  width: 8rem;
+  height: 2rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: -4px 4px 6px #520209;
+  background: #ff4655;
+  cursor: pointer;
+}
+
+#valorant_get_hidden_ranks_data_current_gamemode_unrated {
+  filter: blur(1px);
+  box-shadow: 4px 4px 6px #520209 !important;
+}
+
+#valorant_get_hidden_ranks_data_current_gamemode_deathmatch {}
+
+#valorant_get_hidden_ranks_data_current_user {
+  padding: .5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#valorant_get_hidden_ranks_data_current_user_image {}
+
+#valorant_get_hidden_ranks_data_current_user_username {}
+
+#valorant_get_hidden_ranks_data_search_bar input {
+  padding: .5em;
+  width: 16.9375rem;
+  border-radius: 5px;
+  height: 2em;
+}
+
+#valorant_get_hidden_ranks_data_list {
+  padding: 1em;
+}
+.valorant_get_hidden_ranks_data_list_item{
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  align-items: center;
+  height: 2em;
+}
+.valorant_get_hidden_ranks_data_list_item_username{
+
+}
+.valorant_get_hidden_ranks_data_list_item_rank{
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 7.5em;
+}
+.valorant_get_hidden_ranks_data_list_item_rank_title{
+
+}
+.valorant_get_hidden_ranks_data_list_item_rank_image{
+  width: 30px;
+}
 #players_list {
   display: flex;
   flex-direction: column;

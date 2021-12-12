@@ -91,8 +91,25 @@ try {
 
   const getPlayerItemHtml = (o) => el('div', {
     classList: ['valorant_get_hidden_ranks_data_list_item'],
-    innerText: `${o.username}: ${o.rank?.tierName || 'private'}`
-  })
+  }, [
+    el('div', {
+      classList: ['valorant_get_hidden_ranks_data_list_item_username'],
+      innerText: o.username,
+    }),
+    el('div', {
+      classList: ['valorant_get_hidden_ranks_data_list_item_rank'],
+    }, o.rank?.tierName ? [
+      el('img', {
+        classList: ['valorant_get_hidden_ranks_data_list_item_rank_image'],
+        src: o.rank?.iconUrl,
+        alt: '!'
+      }),
+      el('div', {
+        classList: ['valorant_get_hidden_ranks_data_list_item_rank_title'],
+        innerText: o.rank?.tierName || 'private'
+      }),
+    ] : []),
+  ])
 
   const getSidePopupHTML = () => el('div', {
     id: 'valorant_get_hidden_ranks_popup'
@@ -125,7 +142,7 @@ try {
       el('img', {
         id: 'valorant_get_hidden_ranks_data_current_user_image',
         src: 'some image',
-        alt: '[image]'
+        alt: '!'
       }),
       el('div', {
         id: 'valorant_get_hidden_ranks_data_current_user_username',
@@ -141,8 +158,8 @@ try {
       })
     ]),
     el('div', {
-        id: 'valorant_get_hidden_ranks_data_list',
-      },
+      id: 'valorant_get_hidden_ranks_data_list',
+    },
       // [...Array(14)].map((o, i) =>
       //   el('div', {
       //     classList: ['valorant_get_hidden_ranks_data_list_item'],
@@ -160,8 +177,8 @@ try {
   // https://api.tracker.gg/api/v2/valorant/standard/matches/riot/Genis%239846?type=deathmatch
   // https://api.tracker.gg/api/v2/valorant/standard/matches/riot/merlosan%23EUW?type=competitive
   const getUserMatches = (username, type) =>
-    fetch(`https://api.tracker.gg/api/v2/valorant/standard/matches/riot/${username.replace('#','%23')}?type=${type}`, fetchOptions)
-    .then(response => response.json())
+    fetch(`https://api.tracker.gg/api/v2/valorant/standard/matches/riot/${username.replace('#', '%23')}?type=${type}`, fetchOptions)
+      .then(response => response.json())
 
   const getMatchId = (username) => {
     return getUserMatches(username, DEATHMATCH)
