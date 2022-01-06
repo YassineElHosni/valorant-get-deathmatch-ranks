@@ -1,13 +1,13 @@
 {
   "name": "Valorant",
-  "description": "Get the list of users ranks from your last deathmatch",
+  "description": "Get the latest rank of public users",
   "version": "0.0.0.2",
   "manifest_version": 3,
   "background": {
     "service_worker": "/js/background.js"
   },
-  "permissions": ["storage", "activeTab", "scripting", "tabs"],
-  "host_permissions": ["<all_urls>"],
+  "permissions": ["scripting", "tabs"],
+  "host_permissions": ["https://tracker.gg/valorant/*"],
   "action": {
     "default_icon": {
       "16": "/images/valorant16.png",

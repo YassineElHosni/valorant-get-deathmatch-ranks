@@ -1,17 +1,17 @@
-let color = '#3aa757'
-let player = {
-  username: 'merlosan#EUW'
-}
+// let color = '#3aa757'
+// let player = {
+//   username: 'merlosan#EUW'
+// }
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({
-    color,
-    player
-  })
-  console.log('Default background color set to %cgreen', `color: ${color}`)
-  console.log('Default background player set to %cgreen', `player: ${player.name}#${player.tag}`)
-})
-let curre
+// chrome.runtime.onInstalled.addListener(() => {
+//   chrome.storage.sync.set({
+//     color,
+//     player
+//   })
+//   console.log('Default background color set to %cgreen', `color: ${color}`)
+//   console.log('Default background player set to %cgreen', `player: ${player.name}#${player.tag}`)
+// })
+// let curre
 chrome.action.onClicked.addListener(() => {
   chrome.tabs.create({
     'url': 'https://tracker.gg/valorant'
