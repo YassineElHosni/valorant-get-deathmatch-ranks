@@ -1,7 +1,7 @@
 {
   "name": "Valorant",
   "description": "Get the list of users ranks from your last deathmatch",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "manifest_version": 3,
   "background": {
     "service_worker": "/js/background.js"
