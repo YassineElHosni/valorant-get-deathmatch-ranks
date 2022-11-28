@@ -1,20 +1,21 @@
 let hasTarget = false
 let hasLoaded = false
-const checker = setInterval(()=>{
+const checker = setInterval(() => {
   let target = document.querySelectorAll("div.flex.agent span.trn-ign")
   // console.log(hasTarget, hasLoaded, '--check if', target?.length>0)
-  if(target?.length>0){
+  if (target?.length > 0) {
     hasTarget = true
-    if(!hasLoaded){
+    if (!hasLoaded) {
       // run once
       trackerGGAddon()
     }
     hasLoaded = true
-  }else {
+  } else {
     hasTarget = false
     hasLoaded = false
   }
 }, 1000);
+
 const trackerGGAddon = () => {
   console.log('---running---')
   try {
@@ -76,8 +77,8 @@ const trackerGGAddon = () => {
         Object.assign(document.createElement(tag), props)
       );
 
-    let list = document.querySelectorAll("div.flex.agent span.trn-ign");
-    let listForIcon = document.querySelectorAll("div.flex.agent div.agent-icon");
+    let list = document.querySelectorAll("span.trn-ign");
+    let listForIcon = [...document.querySelectorAll("div.image img")].filter(o => o.src.includes('agent')).map(o => o.parentElement)
 
     let getTargets = () => {
       console.log('---getTargets running -', list, listForIcon)
@@ -104,12 +105,12 @@ const trackerGGAddon = () => {
         //   target.querySelector(".addon_rank_target").src = srcToAdd;
         //   target.querySelector(".addon_rank_target").style = privateStype;
         // } else {
-        if (!isPrivateOrUnknown) target.style = "width: 4rem;";
+        if (!isPrivateOrUnknown) target.style = "width: 4rem;display: flex;";
         const newItem = el("img", {
           class: "addon_rank_target",
           src: srcToAdd,
           width: 25,
-          style: isPrivateOrUnknown ? privateStype : "",
+          style: isPrivateOrUnknown ? privateStype : "object-fit: contain;",
         });
         target.insertBefore(newItem, target.childNodes[0]);
       }
